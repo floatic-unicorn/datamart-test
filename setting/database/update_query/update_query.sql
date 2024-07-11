@@ -24,24 +24,7 @@ SET w.picking_departed_at = NOW(),
     wa.picking_departed_at = w.picking_departed_at
 WHERE w.work_id =:work_id;
 
--- picking_departed 삭제
-UPDATE work.work w
-JOIN workgroup.work_group wg ON w.work_group_id = wg.work_group_id
-JOIN wave.wave wa ON w.wave_id = wa.wave_id
-SET w.picking_departed_at = NULL,
-    wg.picking_departed_at = w.picking_departed_at,
-    wa.picking_departed_at = w.picking_departed_at,
-    w.picking_completed_at = NULL,
-    wg.picking_completed_at = w.picking_completed_at,
-    wa.picking_completed_at = w.picking_completed_at,
-    w.unloading_departed_at = NULL,
-    wg.unloading_departed_at = w.unloading_departed_at,
-    wa.unloading_departed_at = w.unloading_departed_at,
-    w.unloading_completed_at = NULL,
-    wg.unloading_completed_at = w.unloading_completed_at,
-    wa.unloading_completed_at = w.unloading_completed_at,
-    w.response_quantity = NULL
-WHERE w.work_id =:work_id;
+
 
 -- picking_completed 추가
 UPDATE work.work w
@@ -53,21 +36,7 @@ SET w.picking_completed_at = NOW(),
     w.response_quantity = w.request_quantity
 WHERE w.work_id =:work_id;
 
--- picking_completed 삭제
-UPDATE work.work w
-JOIN workgroup.work_group wg ON w.work_group_id = wg.work_group_id
-JOIN wave.wave wa ON w.wave_id = wa.wave_id
-SET w.picking_completed_at = NULL,
-    wg.picking_completed_at = w.picking_completed_at,
-    wa.picking_completed_at = w.picking_completed_at,
-    w.unloading_departed_at = NULL,
-    wg.unloading_departed_at = w.unloading_departed_at,
-    wa.unloading_departed_at = w.unloading_departed_at,
-    w.unloading_completed_at = NULL,
-    wg.unloading_completed_at = w.unloading_completed_at,
-    wa.unloading_completed_at = w.unloading_completed_at,
-    w.response_quantity = NULL
-WHERE w.work_id =:work_id;
+
 
 -- unloading_departed 추가
 UPDATE work.work w
@@ -79,18 +48,7 @@ SET w.unloading_departed_at = NOW(),
     w.response_quantity = w.request_quantity
 WHERE w.work_id =:work_id;
 
--- unloading_departed 삭제
-UPDATE work.work w
-JOIN workgroup.work_group wg ON w.work_group_id = wg.work_group_id
-JOIN wave.wave wa ON w.wave_id = wa.wave_id
-SET w.unloading_departed_at = NULL,
-    wg.unloading_departed_at = w.unloading_departed_at,
-    wa.unloading_departed_at = w.unloading_departed_at,
-    w.unloading_completed_at = NULL,
-    wg.unloading_completed_at = w.unloading_completed_at,
-    wa.unloading_completed_at = w.unloading_completed_at,
-    w.response_quantity = NULL
-WHERE w.work_id =:work_id;
+
 
 -- unloading_completed 추가
 UPDATE work.work w
@@ -100,14 +58,4 @@ SET w.unloading_completed_at = NOW(),
     wg.unloading_completed_at = w.unloading_completed_at,
     wa.unloading_completed_at = w.unloading_completed_at,
     w.response_quantity = w.request_quantity
-WHERE w.work_id =:work_id;
-
--- unloading_completed 삭제
-UPDATE work.work w
-JOIN workgroup.work_group wg ON w.work_group_id = wg.work_group_id
-JOIN wave.wave wa ON w.wave_id = wa.wave_id
-SET w.unloading_completed_at = NULL,
-    wg.unloading_completed_at = w.unloading_completed_at,
-    wa.unloading_completed_at = w.unloading_completed_at,
-    w.response_quantity = NULL
 WHERE w.work_id =:work_id;
